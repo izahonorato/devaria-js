@@ -1,4 +1,4 @@
-const Produto = require('./Produto'); //exportarção da classe Produto
+const Produto = require('./Produto'); //exportação da classe Produto
 const readline = require('readline');
 
 const leitor = readline.createInterface({
@@ -33,11 +33,12 @@ const verificaDisponibilidade = (listaValida) => {
 
     for(const item of listaValida){
         const itemFormatado = item.trim().toLowerCase();
-        if(produtosMercado.includes(itemFormatado)){
-            produtosDisponiveis.push(itemFormatado); // o item é inserido dentro da lista produtos disponíveis
+        const produto = produtosMercado.find(produtoMercado => produtoMercado.nome === itemFormatado);
+        if(produto){
+            produtosDisponiveis.push(produto); // o item é inserido dentro da lista produtos disponíveis
         }
         else{
-            produtosIndisponiveis.push(itemFormatado);
+            produtosIndisponiveis.push(itemFormatado);//adiciona na lista de indisponiveis
         }
     }
     
@@ -57,7 +58,10 @@ leitor.question(
                 console.log("Os seguintes produtos estão disponíveis: ", disponibilidade.produtosDisponiveis);
                 console.log("Os seguintes produtos estão indisponíveis: ", disponibilidade.produtosIndisponiveis);
 
-                const disponiveisOrdenados = disponibilidade.produtosDisponiveis.sort((produto1, produto2) => produto1.localeCompare(produto2));
+                const disponiveisOrdenados = disponibilidade.
+                produtosDisponiveis
+                .sort((produto1, produto2) => produto1.nome
+                .localeCompare(produto2.nome));
                 console.log("Produtos disponíveis em ordem alfabética: ", disponiveisOrdenados);
             }catch (e){
                 console.log(`Erro ao processar a lista (${e.message})`) //pega a mensagem escrita lá em throw error e exibe
