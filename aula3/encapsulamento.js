@@ -19,4 +19,4 @@ class Produto{
 }
 
 const produto = new Produto("Monitor", 2500);
-console.log(produto.nome, produto.preco);
+console.log(produto.nome, produto.preco); 
